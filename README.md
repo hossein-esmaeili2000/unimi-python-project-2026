@@ -31,7 +31,7 @@ Indicators:
 
 ## Setup and execution
 
-The notebook has been run successfully in the author's local environment, reporting **Python 3.14.7**. Validation in a fresh environment is pending.
+Validated on Windows with Python 3.14.7 using a fresh clone and a newly created virtual environment. Dependencies were installed from requirements.txt, both raw CSV files were downloaded automatically, and all notebook cells completed without errors, displaying all five country charts. This check was performed on the author's computer; other operating systems have not been tested.
 
 1. Clone the repository:
 
@@ -84,4 +84,4 @@ Five country charts are saved as PNG files in `outputs/figures/`.
 
 ## Next steps
 
-Improve documentation and code organization, check sensitivity to the selected period, and validate execution from a fresh clone.
+Improve notebook explanations, organize reusable analysis code into modules, check sensitivity to the selected period, and practise explaining the implementation and findings.
