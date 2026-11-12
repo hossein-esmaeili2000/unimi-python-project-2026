@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Green Growth: raw CSV files are downloaded by the notebook
+/data/raw/*.csv
+
+# Incomplete downloads
+/data/raw/*.part

@@ -1,1 +1,0 @@
-print("Hello, UNIMI Python Project!")
