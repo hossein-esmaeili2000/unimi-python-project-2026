@@ -29,6 +29,18 @@ Indicators:
 - **CO₂:** annual total emissions excluding land-use change; million tonnes.
 - **Population:** number of people.
 
+## Project structure
+
+| File or directory | Purpose |
+|---|---|
+| `green_growth.ipynb` | Analysis narrative, function calls, tables and charts |
+| `data_io.py` | Project paths, snapshot downloads, CSV checks and data loading |
+| `analysis.py` | Sample selection, percentage changes, growth summaries and baseline indices |
+| `plotting.py` | Display and save country-level GDP and CO₂ index charts |
+| `data/raw/` | Downloaded CSV files and source metadata |
+| `outputs/figures/` | Generated PNG charts |
+| `requirements.txt` | Required package versions |
+
 ## Setup and execution
 
 Validated on Windows with Python 3.14.7 using a fresh clone and a newly created virtual environment. Dependencies were installed from requirements.txt, both raw CSV files were downloaded automatically, and all notebook cells completed without errors, displaying all five country charts. This check was performed on the author's computer; other operating systems have not been tested.
