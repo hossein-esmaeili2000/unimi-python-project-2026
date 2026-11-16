@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 def percentage_change(start_value, end_value):
@@ -27,3 +28,101 @@ def percentage_change(start_value, end_value):
         raise ValueError("Starting values must be greater than zero.")
 
     return (end_value - start_value) / start_value * 100
+
+
+def select_sample(data, countries, start_year, end_year):
+    """
+    Return the selected countries and inclusive year range.
+
+    Keep country, year, population, GDP and CO2 columns.
+    Return a copy without modifying the input DataFrame.
+    """
+    columns = ["country", "year", "population", "gdp", "co2"]
+
+    return data.loc[
+        data["country"].isin(countries)
+        & data["year"].between(start_year, end_year),
+        columns
+    ].copy()
+
+def summarize_growth(data, start_year, end_year):
+    """
+    Summarize GDP and CO2 percentage changes by country.
+
+    Parameters
+    ----------
+    data : pandas.DataFrame
+        Validated data with country, year, gdp and co2 columns.
+        Each country must have one complete record for each
+        endpoint year, with positive starting GDP and CO2.
+    start_year : int
+        Starting year.
+    end_year : int
+        Ending year, later than start_year.
+
+    Returns
+    -------
+    pandas.DataFrame
+        GDP and CO2 percentage changes and an indicator of
+        GDP growth accompanied by lower CO2 emissions.
+    """
+    start = data.loc[
+        data["year"] == start_year
+    ].set_index("country")
+
+    end = data.loc[
+        data["year"] == end_year
+    ].set_index("country")
+
+    summary = pd.DataFrame({
+        "gdp_change_pct": percentage_change(start["gdp"], end["gdp"]),
+        "co2_change_pct": percentage_change(start["co2"], end["co2"]),
+    })
+
+    summary["gdp_up_co2_down"] = (
+        (summary["gdp_change_pct"] > 0)
+        & (summary["co2_change_pct"] < 0)
+    )
+
+    return summary
+
+def add_base_indices(data, base_year):
+    """
+    Add GDP and CO2 indices relative to a baseline year.
+
+    Parameters
+    ----------
+    data : pandas.DataFrame
+        Data containing country, year, gdp and co2 columns.
+    base_year : int
+        Baseline year, assigned an index of 100.
+
+    Returns
+    -------
+    pandas.DataFrame
+        A copy with gdp_index and co2_index columns.
+
+    Raises
+    ------
+    ValueError
+        If baseline countries are duplicated, or a required
+        baseline value is missing, zero or negative.
+    """
+    result = data.copy()
+
+    base = data.loc[
+        data["year"] == base_year
+    ].set_index("country")
+
+    if not base.index.is_unique:
+        raise ValueError("Each country must have one baseline record.")
+
+    for column in ["gdp", "co2"]:
+        baseline = result["country"].map(base[column])
+
+        if baseline.isna().any() or (baseline <= 0).any():
+            raise ValueError(f"Missing or non-positive baseline for {column}.")
+
+        result[f"{column}_index"] = result[column] / baseline * 100
+
+    return result
