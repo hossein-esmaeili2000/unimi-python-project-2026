@@ -126,3 +126,28 @@ def add_base_indices(data, base_year):
         result[f"{column}_index"] = result[column] / baseline * 100
 
     return result
+
+def add_co2_per_capita(data):
+    """Return a copy with annual CO2 emissions in tonnes per person.
+
+    Requires CO2 in million tonnes and population in people.
+    Both columns must contain finite values. Population must be
+    positive, and CO2 emissions must be non-negative.
+    """
+    columns = ["co2", "population"]
+
+    if not np.isfinite(data[columns].to_numpy(dtype=float)).all():
+        raise ValueError("CO2 and population must contain finite values.")
+
+    if (data["population"] <= 0).any():
+        raise ValueError("Population must be greater than zero.")
+
+    if (data["co2"] < 0).any():
+        raise ValueError("CO2 emissions must be non-negative.")
+
+    result = data.copy()
+    result["co2_per_capita"] = (
+        result["co2"] * 1_000_000 / result["population"]
+    )
+
+    return result

@@ -80,7 +80,12 @@ Internet access is required for dependency installation and the initial data dow
 
 ## Outputs
 
-The notebook displays data checks, a country comparison table and indexed GDP/CO₂ trends.
+Five country charts compare GDP and CO₂ indices (1990 = 100).
+A sixth chart compares annual CO₂ emissions per capita across
+the five countries on a shared scale, measured in tonnes per
+person per year.
+
+All six charts are saved as PNG files in `outputs/figures/`.
 
 Five country charts are saved as PNG files in `outputs/figures/`.
 
