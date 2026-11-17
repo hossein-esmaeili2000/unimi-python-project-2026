@@ -79,16 +79,14 @@ macOS/Linux:
 Internet access is required for dependency installation and the initial data download. Subsequent data loading uses the local files.
 
 ## Outputs
-
 Five country charts compare GDP and CO₂ indices (1990 = 100).
-A sixth chart compares annual CO₂ emissions per capita across
-the five countries on a shared scale, measured in tonnes per
-person per year.
 
-All six charts are saved as PNG files in `outputs/figures/`.
+Two additional charts compare the five countries on shared scales:
+- Annual CO₂ emissions per capita, in tonnes per person per year.
+- CO₂ intensity of GDP, in kilograms per international dollar
+  at constant 2011 prices.
 
-Five country charts are saved as PNG files in `outputs/figures/`.
-
+All seven charts are saved as PNG files in `outputs/figures/`.
 ## Limitations
 
 - Countries were selected purposefully; results do not represent all countries.

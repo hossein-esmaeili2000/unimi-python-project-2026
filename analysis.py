@@ -151,3 +151,28 @@ def add_co2_per_capita(data):
     )
 
     return result
+
+def add_co2_intensity(data):
+    """Return a copy with CO2 intensity in kg per international dollar.
+
+    Requires annual CO2 in million tonnes and GDP in international
+    dollars at constant 2011 prices. Both columns must contain
+    finite values. GDP must be positive and CO2 non-negative.
+    """
+    columns = ["co2", "gdp"]
+
+    if not np.isfinite(data[columns].to_numpy(dtype=float)).all():
+        raise ValueError("CO2 and GDP must contain finite values.")
+
+    if (data["gdp"] <= 0).any():
+        raise ValueError("GDP must be greater than zero.")
+
+    if (data["co2"] < 0).any():
+        raise ValueError("CO2 emissions must be non-negative.")
+
+    result = data.copy()
+    result["co2_intensity"] = (
+        result["co2"] * 1_000_000_000 / result["gdp"]
+    )
+
+    return result
