@@ -78,6 +78,23 @@ macOS/Linux:
 
 Internet access is required for dependency installation and the initial data download. Subsequent data loading uses the local files.
 
+## Key findings
+
+- From 1990 to 2022, GDP grew and total CO₂ emissions fell in
+  Germany, Italy, and the United States (absolute decoupling).
+  In China and India, emissions rose more slowly than GDP
+  (relative decoupling).
+- CO₂ emissions per unit of GDP fell in all five countries.
+  The United States had the highest per-capita emissions among
+  the five in 2022, at 14.83 tonnes per person.
+- The absolute-decoupling classification was consistent across
+  the three start years tested (1990, 2000, and 2010), with 2022
+  as the common end year. The size of the emissions changes
+  varied across periods.
+
+See section 13 of [the notebook](green_growth.ipynb) for the
+full results and limitations.
+
 ## Outputs
 Five country charts compare GDP and CO₂ indices (1990 = 100).
 
@@ -87,6 +104,12 @@ Two additional charts compare the five countries on shared scales:
   at constant 2011 prices.
 
 All seven charts are saved as PNG files in `outputs/figures/`.
+
+The notebook also exports two tables:
+
+- [GDP and total CO₂ changes, 1990–2022](outputs/tables/growth_1990_2022.csv)
+- [Absolute decoupling across the three periods](outputs/tables/decoupling_by_period.csv)
+
 ## Limitations
 
 - Countries were selected purposefully; results do not represent all countries.
