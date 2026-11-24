@@ -66,54 +66,6 @@ def plot_country_trends(data, countries, base_year):
 
     return saved_paths
 
-def plot_co2_per_capita(data, countries):
-    """Plot annual CO2 emissions in tonnes per person.
-
-    Requires country, year and co2_per_capita columns.
-    Save the chart and return its Path.
-    """
-    output_directory = (
-        Path(__file__).resolve().parent / "outputs" / "figures"
-    )
-    output_directory.mkdir(parents=True, exist_ok=True)
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    for country in countries:
-        country_data = data.loc[
-            data["country"] == country
-        ].sort_values("year")
-
-        ax.plot(
-            country_data["year"],
-            country_data["co2_per_capita"],
-            label=country
-        )
-
-    first_year = data.loc[
-        data["country"].isin(countries), "year"
-    ].min()
-    last_year = data.loc[
-        data["country"].isin(countries), "year"
-    ].max()
-
-    ax.set_title(
-        f"CO2 emissions per capita, {first_year}–{last_year}"
-    )
-    ax.set_xlabel("Year")
-    ax.set_ylabel("CO2 emissions (tonnes per person per year)")
-    ax.set_ylim(bottom=0)
-    ax.legend()
-    ax.grid(alpha=0.3)
-    fig.tight_layout()
-
-    figure_path = output_directory / "co2_per_capita_comparison.png"
-    fig.savefig(figure_path, dpi=300, bbox_inches="tight")
-
-    plt.show()
-    plt.close(fig)
-
-    return figure_path
 
 def plot_co2_per_capita(data, countries):
     """Plot annual CO2 emissions in tonnes per person.

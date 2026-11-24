@@ -119,7 +119,3 @@ The notebook also exports two tables:
 - Indices compare relative changes, not absolute economic or emissions levels.
 - Separate charts use different vertical scales.
 - The project uses a fixed data snapshot rather than an automatically updated dataset.
-
-## Next steps
-
-Improve notebook explanations, organize reusable analysis code into modules, check sensitivity to the selected period, and practise explaining the implementation and findings.
